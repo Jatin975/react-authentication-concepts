@@ -39,5 +39,10 @@ export async function AuthAction({ request, params }) {
   const resData = await response.json();
   const token = resData.token;
   localStorage.setItem("token", token);
+
+  let expiredDate = new Date();
+  expiredDate.setHours(expiredDate.getHours() + 1);
+  localStorage.setItem("expiredDate", expiredDate.toISOString());
+
   return redirect("/");
 }
